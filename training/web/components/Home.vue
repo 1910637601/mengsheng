@@ -98,11 +98,5 @@ export default {
 .home-time {
     margin: 20px 0;
     text-align: center;
-    font-size: 100px;
-    /* Increased font size for time display */
-    font-weight: bold;
-    /* Optional: Bold text for emphasis */
-    color: #555;
-    /* Optional: Color adjustment */
 }
 </style>

@@ -40,7 +40,7 @@ export default {
             rules: {
                 no: [
                     { required: true, message: '请输入账号', trigger: 'blur' },
-                    { min: 3, max: 8, message: '长度在 3 到 8 个字符', trigger: 'blur' },
+                    { min: 3, max: 8, message: '长度在 3 到 8个字符', trigger: 'blur' },
                     { validator: this.checkDuplicate, trigger: 'blur' }
                 ],
                 password: [
@@ -89,6 +89,7 @@ export default {
         register() {
             this.$refs.registerForm.validate((valid) => {
                 if (valid) {
+                    // Only store the password field
                     const { confirmPassword, ...data } = this.registerForm;
                     this.$http.post('user/save', data).then(res => res.data).then(res => {
                         if (res.code === 200) {
@@ -96,7 +97,7 @@ export default {
                                 message: '注册成功!',
                                 type: 'success'
                             });
-                            this.$router.go(-1);
+                            this.$router.go(-1); // Go back to the previous page
                         } else {
                             this.$message({
                                 message: '操作失败!',
@@ -118,7 +119,7 @@ export default {
             });
         },
         goBack() {
-            this.$router.go(-1);
+            this.$router.go(-1); // Go back to the previous page
         }
     }
 };
@@ -131,16 +132,13 @@ export default {
     align-items: center;
     height: 100vh;
     background: #f5f5f5;
-    margin: 0;
 }
 
 .register-card {
-    width: 100%;
-    max-width: 400px;
+    width: 400px;
     padding: 20px;
     border-radius: 8px;
     background: #ffffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .title {
@@ -148,15 +146,10 @@ export default {
     margin-bottom: 20px;
     font-size: 24px;
     color: #333;
-    font-weight: bold;
 }
 
 .el-form-item {
     margin-bottom: 15px;
-}
-
-.el-input {
-    font-size: 14px;
 }
 
 .button-group {
@@ -164,29 +157,14 @@ export default {
     justify-content: space-between;
 }
 
-.register-button,
+.register-button {
+    width: 48%;
+    /* Adjust width to fit both buttons in the row */
+}
+
 .back-button {
     width: 48%;
-    padding: 10px 0;
-    font-size: 14px;
-    border-radius: 4px;
-}
-
-.register-button {
-    background-color: #409EFF;
-    border-color: #409EFF;
-    color: #fff;
-}
-
-.back-button {
     background-color: #dcdcdc;
-    border-color: #dcdcdc;
-    color: #333;
-}
-
-.register-button:hover,
-.back-button:hover {
-    opacity: 0.9;
 }
 
 .el-card {
